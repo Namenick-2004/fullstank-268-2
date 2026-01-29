@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "format": "prettier --write *.js"
+    "start": "node src/index.js",
+    "format": "prettier --write *.js",     
+    "dev": "nodemon src/index.js",             
+    "CRUD": "nodemon src/CRUD.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
   },
   "homepage": "https://github.com/Namenick-2004/fullstank-268-2#readme",
   "devDependencies": {
+    "nodemon": "^3.1.11",
     "prettier": "^3.8.0"
   },
   "dependencies": {
