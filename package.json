@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "format": "prettier --write *.js",     
-    "dev": "nodemon src/index.js",             
+    "format": "prettier --write *.js",
+    "dev": "nodemon src/index.js",
     "CRUD": "nodemon src/CRUD.js"
   },
   "repository": {
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "dotenv": "^17.2.3",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "sqlite3": "^5.1.7"
   }
 }
