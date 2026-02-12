@@ -1,15 +1,16 @@
 //ใช้สอบไฟน่อน
 //
 const express = require('express');
-const { Sequelize, DataTypes } = require('sequelize');
-app = express();
+const  Sequelize  = require('sequelize');
+const app = express();
 
 // กำหนดการเชื่อมต่อฐานข้อมูล SQLite
 app.use(express.json());
 const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'sqlite',
-    storage: './Database/book.sqlite' // ที่เก็บไฟล์ฐานข้อมูล SQLite
+    host: 'localhost', // คือ โฮสต์ของฐานข้อมูล
+    dialect: 'sqlite', // คุยยกับฐานข้อมูล SQLite
+    storage: './Database/SQbook.sqlite' // ที่เก็บไฟล์ฐานข้อมูล SQLite 
+    //คือการสร้างที่เก็บข้อมูล'./Database/SQbook.sqlite'
 }); 
 // กำหนดโมเดลสำหรับตารางหนังสือ
 const Book = sequelize.define('Book', {
@@ -28,15 +29,18 @@ const Book = sequelize.define('Book', {
     }
 });
 
+app.get("/", (req, res) => {
+     res.send("Hello World!"); });
+
 // ซิงค์โมเดลกับฐานข้อมูล
-sequelize.sync();   
+sequelize.sync();   // สร้างตารางถ้ายังไม่มี
 
 // ดึงข้อมูลหนังสือทั้งหมด
-app.get('/books',(req, res) => {
-    Book.findAll().then(books => {
-        res.json(books);
-    }).catch(err => {
-        res.status(500).send(err);
+app.get('/books',(req, res) => {  //ต้องพิมbooksในเว็ปไซน์ ดึงข้อมูลหนังสือทั้งหมด
+    Book.findAll().then(books => {  // ดึงข้อมูลหนังสือทั้งหมดจากฐานข้อมูล
+        res.json(books);   // ส่งข้อมูลหนังสือในรูปแบบ JSON ตอบกลับไปยังลูกค้า
+    }).catch(err => {               // จัดการข้อผิดพลาด
+        res.status(500).send(err);   // ส่งสถานะ 500 พร้อมข้อความข้อผิดพลาด
     });
 }); 
 // ดึงข้อมูลหนังสือตามไอดี
@@ -97,5 +101,5 @@ app.delete('/books/:id', (req, res) => {
 
 //start the server
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log('Listening on port ${port}...'));//เหมือนจะผิด
+const PORT = process.env.PORT || 3000;  // กำหนดพอร์ตที่แอปพลิเคชันจะฟังคำขอ
+app.listen(PORT, () =>  console.log(`Listening on port http://localhost:${PORT}...`));  // เริ่มต้นเซิร์ฟเวอร์และแสดงข้อความเมื่อเซิร์ฟเวอร์เริ่มทำงาน
