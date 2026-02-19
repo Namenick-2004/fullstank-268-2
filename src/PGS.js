@@ -1,18 +1,21 @@
-//ใช้สอบไฟน่อน
-//
-const express = require('express');
-const  Sequelize  = require('sequelize');
-const app = express();
+// Description: Node Express REST API with Sequelize and SQLite CRUD Book
+// Date: 03/29/2020
+// npm install express sequelize sqlite3
+// Run this file with node SequlizeSQLiteCRUDBook.js
+// Test with Postman
+require("dotenv").config();
 
-// กำหนดการเชื่อมต่อฐานข้อมูล SQLite
+const express = require('express');
+const Sequelize = require('sequelize');
+const app = express();
+// parse incoming requests
 app.use(express.json());
-const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost', // คือ โฮสต์ของฐานข้อมูล
-    dialect: 'sqlite', // คุยยกับฐานข้อมูล SQLite
-    storage: './Database/SQbook.sqlite' // ที่เก็บไฟล์ฐานข้อมูล SQLite 
-    //คือการสร้างที่เก็บข้อมูล'./Database/SQbook.sqlite'
-}); 
-// กำหนดโมเดลสำหรับตารางหนังสือ
+
+// set db url
+const dbUrl = 'postgres://webadmin:RYLyxy52672@node84868-fullstik268.th.app.ruk-com.cloud:11770/Books'
+
+// create a connection to the database
+const sequelize = new Sequelize(dbUrl);
 const Book = sequelize.define('Book', {
     id:{
         type: Sequelize.INTEGER,
